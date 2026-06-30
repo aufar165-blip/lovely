@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>buat tata unyu unyu 🤠</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#5EC8F2;
+    --sky-bottom:#BFE9FF;
+    --cloud:#FFFFFF;
+    --andy-yellow:#FFD23F;
+    --woody-red:#E0473A;
+    --woody-brown:#7A4B2C;
+    --ink:#2B3A55;
+    --card:#FFFCF2;
+    --buzz-green:#2E9E5B;
+    --star-gold:#FFC93C;
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+
+  html,body{
+    margin:0; padding:0; height:100%;
+    font-family:'Quicksand', sans-serif;
+    color:var(--ink);
+    background:var(--sky-bottom);
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Baloo 2', cursive;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Scroll container ---------- */
+  .scroller{
+    height:100vh;
+    height:100dvh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+    scroll-behavior:smooth;
+  }
+
+  section{
+    position:relative;
+    min-height:100vh;
+    min-height:100dvh;
+    width:100%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:32px 22px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 70% 35% at 20% 12%, rgba(255,255,255,0.95), rgba(255,255,255,0) 60%),
+      radial-gradient(ellipse 60% 30% at 82% 78%, rgba(255,255,255,0.85), rgba(255,255,255,0) 60%),
+      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  }
+
+  /* cloud wallpaper pattern (Andy's room style) */
+  .clouds{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 15% 20%, #fff 0 18px, transparent 19px),
+      radial-gradient(circle at 25% 23%, #fff 0 24px, transparent 25px),
+      radial-gradient(circle at 35% 18%, #fff 0 16px, transparent 17px),
+      radial-gradient(circle at 75% 65%, #fff 0 20px, transparent 21px),
+      radial-gradient(circle at 85% 68%, #fff 0 26px, transparent 27px),
+      radial-gradient(circle at 65% 70%, #fff 0 15px, transparent 16px),
+      radial-gradient(circle at 50% 88%, #fff 0 18px, transparent 19px),
+      radial-gradient(circle at 90% 15%, #fff 0 14px, transparent 15px);
+    background-repeat:repeat;
+    background-size:420px 420px;
+    opacity:0.35;
+    pointer-events:none;
+  }
+
+  .stars{
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, var(--star-gold) 1.5px, transparent 1.5px),
+      radial-gradient(circle, var(--star-gold) 1.5px, transparent 1.5px);
+    background-position:10% 30%, 70% 80%;
+    background-size:140px 140px, 180px 180px;
+    opacity:0.25;
+    pointer-events:none;
+  }
+
+  .content{
+    position:relative;
+    z-index:2;
+    max-width:480px;
+    width:100%;
+    text-align:center;
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  section.visible .content{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .badge{
+    display:inline-block;
+    font-family:'Baloo 2', cursive;
+    font-size:13px;
+    letter-spacing:1px;
+    background:var(--andy-yellow);
+    color:var(--woody-brown);
+    padding:6px 16px;
+    border-radius:999px;
+    border:2px solid #fff;
+    box-shadow:0 3px 0 rgba(0,0,0,0.12);
+    margin-bottom:18px;
+  }
+
+  .emoji-row{
+    font-size:34px;
+    margin-bottom:10px;
+    line-height:1;
+  }
+
+  h1.title{
+    font-size:clamp(24px, 7vw, 32px);
+    font-weight:700;
+    color:var(--woody-red);
+    -webkit-text-stroke:1px rgba(255,255,255,0.5);
+    line-height:1.35;
+    margin:0 0 26px;
+    text-shadow:2px 3px 0 rgba(255,255,255,0.6);
+  }
+
+  p.letter{
+    font-size:clamp(16px, 4.6vw, 19px);
+    line-height:1.7;
+    font-weight:600;
+    background:var(--card);
+    border:3px solid var(--andy-yellow);
+    border-radius:22px;
+    padding:26px 22px;
+    box-shadow:0 10px 0 rgba(0,0,0,0.08);
+    margin:0 0 30px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-stack{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    width:100%;
+  }
+
+  .choice-btn{
+    font-family:'Baloo 2', cursive;
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    background:var(--woody-red);
+    border:none;
+    border-radius:18px;
+    padding:16px 18px;
+    cursor:pointer;
+    box-shadow:0 6px 0 #a8281d;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .choice-btn:nth-child(2){ background:var(--buzz-green); box-shadow:0 6px 0 #1c6b3c; }
+  .choice-btn:nth-child(3){ background:#3A86C8; box-shadow:0 6px 0 #225a8c; }
+
+  .choice-btn:hover{ transform:translateY(-2px) scale(1.03); }
+  .choice-btn:active{
+    transform:translateY(4px) scale(0.98);
+    box-shadow:0 2px 0 rgba(0,0,0,0.2);
+  }
+
+  .next-btn{
+    font-family:'Baloo 2', cursive;
+    font-size:17px;
+    font-weight:700;
+    color:var(--woody-brown);
+    background:var(--andy-yellow);
+    border:none;
+    border-radius:999px;
+    padding:14px 34px;
+    cursor:pointer;
+    box-shadow:0 6px 0 #c79412;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .next-btn:hover{ transform:translateY(-2px) scale(1.04); }
+  .next-btn:active{
+    transform:translateY(4px) scale(0.97);
+    box-shadow:0 2px 0 rgba(0,0,0,0.2);
+  }
+
+  .next-btn .arrow{
+    display:inline-block;
+    animation:bob 1.4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(5px); }
+  }
+
+  .response-card{
+    font-family:'Baloo 2', cursive;
+    font-size:clamp(18px, 5.6vw, 24px);
+    font-weight:600;
+    color:var(--woody-brown);
+    background:#fff;
+    border:3px dashed var(--woody-red);
+    border-radius:24px;
+    padding:30px 20px;
+    margin-bottom:28px;
+    box-shadow:0 8px 0 rgba(0,0,0,0.08);
+  }
+
+  .hidden{ display:none !important; }
+
+  .scroll-hint{
+    position:absolute;
+    bottom:18px;
+    left:0; right:0;
+    text-align:center;
+    font-size:12px;
+    color:var(--ink);
+    opacity:0.55;
+    letter-spacing:1px;
+  }
+
+  .heart-deco{
+    position:absolute;
+    font-size:22px;
+    opacity:0.5;
+    pointer-events:none;
+    animation:float 6s ease-in-out infinite;
+  }
+  @keyframes float{
+    0%,100%{ transform:translateY(0) rotate(-4deg); }
+    50%{ transform:translateY(-16px) rotate(4deg); }
+  }
+
+  /* music toggle */
+  #musicToggle{
+    position:fixed;
+    top:14px; right:14px;
+    z-index:50;
+    width:46px; height:46px;
+    border-radius:50%;
+    border:2px solid #fff;
+    background:var(--andy-yellow);
+    box-shadow:0 4px 0 #c79412;
+    font-size:20px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  #musicToggle:active{ transform:translateY(2px); box-shadow:0 2px 0 #c79412; }
+
+  .closing-emoji{
+    font-size:46px;
+    margin-top:6px;
+  }
+</style>
+</head>
+<body>
+
+<button id="musicToggle" aria-label="toggle music">🔈</button>
+<audio id="bgMusic" loop>
+  <!-- Placeholder source: replace with a licensed copy of "I Knew It, I Knew You" or any track you own -->
+  <source src="audio/i-knew-it-i-knew-you-placeholder.mp3" type="audio/mpeg">
+</audio>
+
+<div class="scroller" id="scroller">
+
+  <!-- SCREEN 1: QUESTION -->
+  <section id="s1">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">🤠🚀⭐</div>
+      <span class="badge">TO INFINITY... AND A QUESTION</span>
+      <h1 class="title">apa anime rekomendasi pertama dari kamu buat aku?</h1>
+      <div class="btn-stack">
+        <button class="choice-btn" data-answer="1">one piece jelek</button>
+        <button class="choice-btn" data-answer="2">fullmetal alchemist</button>
+        <button class="choice-btn" data-answer="3">naruto best anime</button>
+      </div>
+    </div>
+    <div class="heart-deco" style="top:14%; left:8%;">☁️</div>
+    <div class="heart-deco" style="bottom:10%; right:10%; animation-delay:2s;">☁️</div>
+  </section>
+
+  <!-- SCREEN 2: DYNAMIC RESPONSE -->
+  <section id="s2">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">💛</div>
+      <div class="response-card" id="responseText">pilih dulu jawabannya yaa~</div>
+      <button class="next-btn" onclick="goTo('s3')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 3 -->
+  <section id="s3">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">🤠💌</div>
+      <p class="letter">hi my lovely tata unyu unyu</p>
+      <button class="next-btn" onclick="goTo('s4')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 4 -->
+  <section id="s4">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">😅✨</div>
+      <p class="letter">aku bikin ginian mungkin karena aku lagi gabut, ga juga sih tapi emg gabut tapi biar nyenengin km ajah (ya jujur bantuan ai). mungkin biar km ga ngomel seminggu ke depan wkwk. tapi jujur ga banget aku ngomong panjang gini tpi biar keliatan agak niat aja bikinnya.</p>
+      <button class="next-btn" onclick="goTo('s5')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 5 -->
+  <section id="s5">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">🌟💛</div>
+      <p class="letter">I remember when I realized I saw you standing there, with your hair tied up and make up running down your face lol but you looked so stunning to me</p>
+      <button class="next-btn" onclick="goTo('s6')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 6 -->
+  <section id="s6">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">🥺🤍</div>
+      <p class="letter">maaf yaa.... mungkin belakangan ini aku banyak bilang bete atau sedih ke km karena masalah aku, tpi aku inget km selalu temenin aku (klo lg ga ngomel")</p>
+      <button class="next-btn" onclick="goTo('s7')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 7 -->
+  <section id="s7">
+    <div class="clouds"></div>
+    <div class="content">
+      <div class="emoji-row">🚀💛</div>
+      <p class="letter">makasih udh coba hadir klo mungkin aku lg sedih sm masalah aku. aku gamau janjiin apa apa, tpi setelah masalah ini aku mau main sama kmuu. mau bgt (yg ini ga boong)</p>
+      <button class="next-btn" onclick="goTo('s8')"><span>lanjut</span><span class="arrow">↓</span></button>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: CLOSING -->
+  <section id="s8">
+    <div class="clouds"></div>
+    <div class="stars"></div>
+    <div class="content">
+      <p class="letter">gitu aja plis lov u</p>
+      <div class="closing-emoji">🤠❤️🚀</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const responses = {
+    "1": 'emang kamu ga sayang sama aku',
+    "2": 'yey km bener tapi kok tumben km inget ya',
+    "3": 'walaupun salah, tp km kliatan emg km sayang aku'
+  };
+
+  document.querySelectorAll('.choice-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const key = btn.getAttribute('data-answer');
+      document.getElementById('responseText').textContent = responses[key];
+      goTo('s2');
+    });
+  });
+
+  function goTo(id){
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  }
+
+  // fade-in on viewport entry
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(sec => observer.observe(sec));
+
+  // background music toggle (autoplay is blocked by browsers until a user gesture)
+  const audio = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicToggle');
+  let playing = false;
+
+  function tryAutoplay(){
+    audio.play().then(()=>{
+      playing = true;
+      musicBtn.textContent = '🔊';
+    }).catch(()=>{
+      playing = false;
+      musicBtn.textContent = '🔈';
+    });
+  }
+  window.addEventListener('load', tryAutoplay);
+
+  musicBtn.addEventListener('click', ()=>{
+    if(playing){
+      audio.pause();
+      musicBtn.textContent = '🔈';
+    } else {
+      audio.play();
+      musicBtn.textContent = '🔊';
+    }
+    playing = !playing;
+  });
+
+  // first user tap anywhere also tries to start music (covers autoplay block)
+  document.body.addEventListener('click', function startOnce(){
+    if(!playing){ tryAutoplay(); }
+    document.body.removeEventListener('click', startOnce);
+  }, { once:true });
+</script>
+
+</body>
+</html>
